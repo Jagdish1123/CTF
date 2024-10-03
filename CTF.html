@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTF Challenge - Professional Level</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1c1c1c;
+            color: #f0f0f0;
+            padding: 50px;
+            text-align: center;
+        }
+        h1 {
+            color: #f39c12;
+        }
+        p {
+            color: #bdc3c7;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Advanced CTF Challenge</h1>
+    <p>The flag is deeply hidden. Are you up for it?</p>
+    <button onclick="g1()">Get a Hint</button>
+
+    <script>
+        // Function to reverse a string
+        function p8(t) {
+            return t.split('').reverse().join('');
+        }
+
+        // Function to perform XOR encryption
+        function r7(t, k) {
+            return t.split('').map((c, i) => String.fromCharCode(c.charCodeAt(0) ^ k[i % k.length].charCodeAt(0))).join('');
+        }
+
+        // Function to encode to base64
+        function s9(t) {
+            return btoa(t);
+        }
+
+        // Function to decode from base64
+        function t4(t) {
+            return atob(t);
+        }
+
+        // Flag parts and storage mechanism
+        let x1 = s9("dynamic_");
+        let y2 = "secret{";
+        let z3 = p8("}egnellahc_");
+
+        // Store x1 in session storage and y2 in a cookie
+        sessionStorage.setItem("k4", x1);
+        document.cookie = "m5=" + s9(y2) + "; path=/; SameSite=Lax;";
+
+        // Combine the parts to form the full flag
+        function n6() {
+            const a7 = sessionStorage.getItem("k4");
+            const b8 = t4(getC9("m5"));
+            return b8 + a7 + z3;
+        }
+
+        // Function to retrieve the cookie value by name
+        function getC9(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+
+        // Obscure function to hint at the flag
+        function j2() {
+            if (Math.random() > 0.5) {
+                alert("The flag is stored in two places. Use your tools wisely to uncover it!");
+            }
+        }
+
+        // Hint function for button click
+        function g1() {
+            alert("Hint: Explore your browser's storage and look for both cookies and session storage!");
+            j2();
+        }
+
+        // Console messages to guide the player
+        console.log('Hidden treasures await! Check for clues in unexpected places.');
+        console.log('Use your skills to find the secret within the browser environment.');
+
+        // Uncomment to display the flag in the console (for testing purposes)
+        // console.log(n6());
+    </script>
+</body>
+</html>
