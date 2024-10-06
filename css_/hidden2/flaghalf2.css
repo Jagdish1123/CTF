@@ -1,0 +1,5 @@
+body::before {
+
+    content: "FLAG{PICT_Cybercell_Is_The_Best";
+    display: none;
+}
